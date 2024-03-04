@@ -54,7 +54,7 @@ export default function Faucet() {
               </div>
             </div>
             <div className="flex justify-center">
-              <HCaptcha sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY as string} onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)} />
+              <HCaptcha sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE as string} onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)} />
             </div>
             <div>
               <button disabled={isDisabled} type="submit" className="disabled:opacity-25 group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
