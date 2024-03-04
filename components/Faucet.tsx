@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { FormEvent } from "react";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
+// import HCaptcha from "@hcaptcha/react-hcaptcha";
 import SuccessModal from "./SuccessModal";
 import ErrorModal from "./ErrorModal";
 
 export default function Faucet() {
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [hcaptchaToken, setHcaptchaToken] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
+  // const [hcaptchaToken, setHcaptchaToken] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleVerificationSuccess = async (token: string, ekey: string) => {
-    // set hcaptcha token
-    setHcaptchaToken(token);
-    // enable submit button
-    setIsDisabled(false);
-  };
+  // const handleVerificationSuccess = async (token: string, ekey: string) => {
+  //   // set hcaptcha token
+  //   setHcaptchaToken(token);
+  //   // enable submit button
+  //   setIsDisabled(false);
+  // };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,7 +24,7 @@ export default function Faucet() {
     // send request to faucet
     const response = await fetch("/api/faucet", {
       method: "POST",
-      body: JSON.stringify({ address: event.currentTarget.address.value, hcaptchaToken }),
+      body: JSON.stringify({ address: event.currentTarget.address.value }),
     });
     // parse response
     const data = await response.json();
@@ -33,6 +33,7 @@ export default function Faucet() {
     // success!
     setSuccessMessage(data.message);
   };
+
 
   return (
     <>
@@ -54,7 +55,7 @@ export default function Faucet() {
               </div>
             </div>
             <div className="flex justify-center">
-              <HCaptcha sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE as string} onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)} />
+              {/* <HCaptcha sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY as string} onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)} /> */}
             </div>
             <div>
               <button disabled={isDisabled} type="submit" className="disabled:opacity-25 group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
