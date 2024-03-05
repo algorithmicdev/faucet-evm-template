@@ -19,7 +19,7 @@ type Message = {
  */
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Message>) {
   // parse the request body
-  const { address, ipAddress } = JSON.parse(req.body);
+  const { address, ip } = JSON.parse(req.body);
   // verify address
   const isAddress = ethers.utils.isAddress(address);
   // if invalid address
@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   // // if invalid captcha, return 401
   // if (!verified.success) return res.status(401).json({ message: "Invalid Captcha" });
   // if cooldown is enough to recieve funds
-  const recieved = await canRecieve(ipAddress);
+  const recieved = await canRecieve(ip);
   // if not enough time has passed
   if (!recieved.success) return res.status(400).json({ message: recieved.message });
   // transfer coin
@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   // if transfer was unsuccessful
   if (!transfer.success) return res.status(400).json({ message: transfer.message });
   // update the last transfer timestamp to now
-  await redis.set(ipAddress, Math.floor(Date.now() / 1000));
+  await redis.set(ip, Math.floor(Date.now() / 1000));
   // transfer is successful
   return res.status(200).json({ message: transfer.message });
 }

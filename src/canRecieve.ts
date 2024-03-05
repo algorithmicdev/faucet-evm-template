@@ -10,9 +10,9 @@ type CanRecieve = {
  * @param {string} address - The address to check
  * @returns {CanRecieve} - The result of the check
  */
-export default async function canRecieve(address: string): Promise<CanRecieve> {
+export default async function canRecieve(ip: string): Promise<CanRecieve> {
   // get timestamp in seconds
-  const lastRecieve = await redis.get(address);
+  const lastRecieve = await redis.get(ip);
   // if address never been transfered to
   if (lastRecieve === null) return { success: true, message: "🚢" };
   // now in seconds
