@@ -21,9 +21,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   // parse the request body
   const { address } = JSON.parse(req.body);
   // verify address
-  const isAddress = ethers.utils.isAddress(address);
+  // const isAddress = ethers.utils.isAddress(address);
   // if invalid address
-  if (!isAddress) return res.status(400).json({ message: "Invalid Address" });
+  // if (!isAddress) return res.status(400).json({ message: "Invalid Address" });
   // verify the captcha
   // const verified = await verify(process.env.HCAPTCHA_SECRET as string, hcaptchaToken);
   // // if invalid captcha, return 401
