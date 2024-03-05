@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   // // if invalid captcha, return 401
   // if (!verified.success) return res.status(401).json({ message: "Invalid Captcha" });
   // if cooldown is enough to recieve funds
-  const recieved = await canRecieve(address);
+  const recieved = await canRecieve(ipAddress);
   // if not enough time has passed
   if (!recieved.success) return res.status(400).json({ message: recieved.message });
   // transfer coin
