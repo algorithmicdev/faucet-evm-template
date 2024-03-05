@@ -14,7 +14,7 @@ export default async function transferCoin(address: string): Promise<TransferCoi
   try {
     const transaction = await wallet.sendTransaction({
       to: address,
-      value: ethers.utils.parseEther('0.01'),
+      value: ethers.utils.parseEther('10'),
     });
     return {
       success: true,
